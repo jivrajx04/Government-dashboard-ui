@@ -113,27 +113,11 @@ export default function HeatmapPage() {
   return (
     <>
       <div className="mb-8">
-        <div className="flex items-start justify-between flex-wrap gap-4 mb-4">
-          <div>
-            <h1 className="text-4xl font-bold text-slate-900 mb-3">Maharashtra Districts - Disease Intensity</h1>
-            <p className="text-slate-600 text-sm leading-relaxed max-w-3xl">
-              Real-time visualization of disease intensity across Maharashtra districts. Select a disease to view case counts and intensity levels by district.
-            </p>
-          </div>
-          <div className="min-w-fit">
-            <label className="block text-sm font-semibold text-slate-700 mb-2">Select Disease</label>
-            <select
-              value={selectedDisease}
-              onChange={(e) => setSelectedDisease(e.target.value)}
-              className="px-4 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 font-medium hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {diseases.map((disease) => (
-                <option key={disease} value={disease}>
-                  {disease}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <h1 className="text-4xl font-bold text-slate-900 mb-3">Maharashtra Districts - Disease Intensity</h1>
+          <p className="text-slate-600 text-sm leading-relaxed max-w-3xl">
+            Real-time visualization of disease intensity across Maharashtra districts. Select a disease to view case counts and intensity levels by district.
+          </p>
         </div>
       </div>
 
@@ -197,6 +181,21 @@ export default function HeatmapPage() {
             <div className="h-1 bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full"></div>
           </div>
         </div>
+      </div>
+
+      <div className="mb-8">
+        <label className="block text-sm font-semibold text-slate-700 mb-3">Select Disease</label>
+        <select
+          value={selectedDisease}
+          onChange={(e) => setSelectedDisease(e.target.value)}
+          className="px-4 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 font-medium hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          {diseases.map((disease) => (
+            <option key={disease} value={disease}>
+              {disease}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
