@@ -31,7 +31,7 @@ export default function KpiRow() {
         color="amber"
       />
       <KpiCard
-        title="Hotspot Regions"
+        title="Hotspot Regionss"
         value={kpiData.regionHotspotCount}
         icon="🗺️"
         variant="standard"
