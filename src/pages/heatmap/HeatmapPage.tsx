@@ -183,7 +183,7 @@ export default function HeatmapPage() {
         </div>
       </div>
 
-      <div className="mb-8">
+      <div className="mb-8 align-center">
         <label className="block text-sm font-semibold text-slate-700 mb-3">Select Disease</label>
         <select
           value={selectedDisease}
