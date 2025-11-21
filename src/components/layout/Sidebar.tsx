@@ -43,7 +43,7 @@ export default function Sidebar() {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <aside className="w-60 h-screen bg-gradient-to-b from-slate-800 to-slate-900 text-white flex flex-col border-r border-slate-700/50">
+    <aside className="fixed left-0 top-0 w-[260px] h-screen bg-gradient-to-b from-slate-800 to-slate-900 text-white flex flex-col border-r border-slate-700/50 overflow-y-auto z-50">
       {/* Header */}
       <div className="h-16 flex items-center px-4 border-b border-slate-700/50">
         <div className="flex items-center gap-2">
