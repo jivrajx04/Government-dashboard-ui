@@ -22,12 +22,6 @@ const navigationSections: NavSection[] = [
       { label: 'Heatmap', href: '/heatmap', icon: '🗺️', section: 'MAIN' },
     ],
   },
-  {
-    name: 'SYSTEM',
-    items: [
-      { label: 'Settings', href: '/settings', icon: '⚙️', section: 'SYSTEM' },
-    ],
-  },
 ];
 
 export default function Sidebar() {
