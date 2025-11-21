@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface NavItem {
   label: string;
@@ -26,6 +26,7 @@ const navigationSections: NavSection[] = [
 
 export default function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const isActive = (href: string) => location.pathname === href;
@@ -102,26 +103,14 @@ export default function Sidebar() {
             </svg>
           </button>
 
-          {/* Dropdown Menu */}
           {isDropdownOpen && (
             <div className="absolute bottom-full left-0 right-0 mb-2 bg-slate-700 rounded-lg shadow-xl border border-slate-600 overflow-hidden z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
-              <a
-                href="/profile"
-                className="block px-4 py-2.5 text-sm text-slate-200 hover:bg-slate-600 transition-colors"
-              >
-                View Profile
-              </a>
-              <a
-                href="/preferences"
-                className="block px-4 py-2.5 text-sm text-slate-200 hover:bg-slate-600 transition-colors border-t border-slate-600"
-              >
-                Preferences
-              </a>
               <button
                 onClick={() => {
                   setIsDropdownOpen(false);
+                  navigate('/login');
                 }}
-                className="w-full text-left px-4 py-2.5 text-sm text-red-400 hover:bg-slate-600 transition-colors border-t border-slate-600"
+                className="w-full text-left px-4 py-2.5 text-sm text-red-400 hover:bg-slate-600 transition-colors"
               >
                 Sign Out
               </button>
