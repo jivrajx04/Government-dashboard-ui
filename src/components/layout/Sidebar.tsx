@@ -23,13 +23,6 @@ const navigationSections: NavSection[] = [
     ],
   },
   {
-    name: 'OPERATIONS',
-    items: [
-      { label: 'Labs', href: '/labs', icon: '🧪', section: 'OPERATIONS' },
-      { label: 'Providers', href: '/providers', icon: '👨‍⚕️', section: 'OPERATIONS' },
-    ],
-  },
-  {
     name: 'SYSTEM',
     items: [
       { label: 'Settings', href: '/settings', icon: '⚙️', section: 'SYSTEM' },
