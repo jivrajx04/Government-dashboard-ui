@@ -27,7 +27,10 @@ export default function Navbar() {
 
       <div className="flex items-center gap-6">
 
-        <button className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all duration-200">
+        <button
+          onClick={() => navigate('/alerts')}
+          className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all duration-200"
+        >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
