@@ -47,8 +47,8 @@ export default function Login() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center px-4 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-20 -left-20 w-96 h-96 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-32 -right-20 w-[500px] h-[500px] bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-20 -left-20 w-96 h-96 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+          <div className="absolute bottom-32 -right-20 w-[500px] h-[500px] bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-400 to-cyan-600 rounded-full mix-blend-screen filter blur-3xl opacity-10"></div>
         </div>
 
