@@ -13,7 +13,7 @@ export default function Top5BarChart() {
   const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 
   return (
-    <div className="grid grid-cols-1 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
         <h2 className="text-lg font-bold mb-4">Top 5 Diseases This Week</h2>
         <svg width="100%" viewBox={`0 0 ${width} ${height}`} className="max-w-full">
@@ -38,7 +38,7 @@ export default function Top5BarChart() {
         </svg>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+      <div className="lg:col-span-2 bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
         <h2 className="text-lg font-bold mb-4">Weekly Cases Per Region</h2>
         <svg width="100%" viewBox={`0 0 ${width} ${height}`} className="max-w-full">
           <line x1={padding} y1={height - padding} x2={width - padding} y2={height - padding} stroke="#e5e7eb" strokeWidth="2" />
