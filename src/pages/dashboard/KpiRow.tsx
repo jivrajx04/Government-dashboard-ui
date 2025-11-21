@@ -6,6 +6,13 @@ export default function KpiRow() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
       <KpiCard
+        title="Top Rising Diseases"
+        value={kpiData.topRisingDiseases[0]}
+        icon="🦠"
+        variant="standard"
+        color="emerald"
+      />
+      <KpiCard
         title="Daily New Cases"
         value={kpiData.dailyNewCases}
         icon="📈"
@@ -22,13 +29,6 @@ export default function KpiRow() {
         trend="up"
         variant="trend"
         color="amber"
-      />
-      <KpiCard
-        title="Top Rising Diseases"
-        value={kpiData.topRisingDiseases[0]}
-        icon="🦠"
-        variant="standard"
-        color="emerald"
       />
       <KpiCard
         title="Region Hotspot Count"
