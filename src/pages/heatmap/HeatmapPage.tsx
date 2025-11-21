@@ -1,36 +1,74 @@
 import { useState } from 'react';
 
 interface HeatmapCell {
-  region: string;
+  district: string;
   intensity: number;
+  cases: Record<string, number>;
 }
 
-const heatmapData: HeatmapCell[] = [
-  { region: 'Pune', intensity: 82 },
-  { region: 'Mumbai', intensity: 45 },
-  { region: 'Delhi', intensity: 91 },
-  { region: 'Bangalore', intensity: 34 },
-  { region: 'Chennai', intensity: 67 },
-  { region: 'Hyderabad', intensity: 58 },
-  { region: 'Kolkata', intensity: 73 },
-  { region: 'Ahmedabad', intensity: 29 },
-  { region: 'Jaipur', intensity: 86 },
-  { region: 'Lucknow', intensity: 51 },
-  { region: 'Chandigarh', intensity: 42 },
-  { region: 'Indore', intensity: 64 },
-  { region: 'Nagpur', intensity: 77 },
-  { region: 'Patna', intensity: 38 },
-  { region: 'Surat', intensity: 55 },
-  { region: 'Kochi', intensity: 48 },
-  { region: 'Bhopal', intensity: 71 },
-  { region: 'Vadodara', intensity: 33 },
-  { region: 'Ranchi', intensity: 62 },
-  { region: 'Guwahati', intensity: 46 },
-  { region: 'Coimbatore', intensity: 54 },
-  { region: 'Mysore', intensity: 41 },
-  { region: 'Vizag', intensity: 69 },
-  { region: 'Kanpur', intensity: 79 },
-  { region: 'Agra', intensity: 57 },
+const diseases = ['Influenza', 'COVID-19', 'RSV', 'Dengue', 'Malaria'];
+
+const maharashtraDistrictData: HeatmapCell[] = [
+  {
+    district: 'Pune',
+    intensity: 82,
+    cases: { Influenza: 82, 'COVID-19': 45, RSV: 65, Dengue: 78, Malaria: 52 },
+  },
+  {
+    district: 'Mumbai',
+    intensity: 75,
+    cases: { Influenza: 75, 'COVID-19': 68, RSV: 72, Dengue: 88, Malaria: 45 },
+  },
+  {
+    district: 'Nagpur',
+    intensity: 77,
+    cases: { Influenza: 77, 'COVID-19': 58, RSV: 64, Dengue: 82, Malaria: 71 },
+  },
+  {
+    district: 'Aurangabad',
+    intensity: 58,
+    cases: { Influenza: 58, 'COVID-19': 42, RSV: 51, Dengue: 62, Malaria: 48 },
+  },
+  {
+    district: 'Nashik',
+    intensity: 64,
+    cases: { Influenza: 64, 'COVID-19': 35, RSV: 58, Dengue: 72, Malaria: 55 },
+  },
+  {
+    district: 'Kolhapur',
+    intensity: 71,
+    cases: { Influenza: 71, 'COVID-19': 52, RSV: 68, Dengue: 75, Malaria: 62 },
+  },
+  {
+    district: 'Satara',
+    intensity: 52,
+    cases: { Influenza: 52, 'COVID-19': 38, RSV: 45, Dengue: 58, Malaria: 41 },
+  },
+  {
+    district: 'Sangli',
+    intensity: 48,
+    cases: { Influenza: 48, 'COVID-19': 32, RSV: 42, Dengue: 51, Malaria: 38 },
+  },
+  {
+    district: 'Solapur',
+    intensity: 67,
+    cases: { Influenza: 67, 'COVID-19': 45, RSV: 62, Dengue: 71, Malaria: 58 },
+  },
+  {
+    district: 'Ahmednagar',
+    intensity: 62,
+    cases: { Influenza: 62, 'COVID-19': 48, RSV: 55, Dengue: 68, Malaria: 52 },
+  },
+  {
+    district: 'Thane',
+    intensity: 79,
+    cases: { Influenza: 79, 'COVID-19': 65, RSV: 75, Dengue: 82, Malaria: 68 },
+  },
+  {
+    district: 'Raigad',
+    intensity: 54,
+    cases: { Influenza: 54, 'COVID-19': 40, RSV: 48, Dengue: 62, Malaria: 45 },
+  },
 ];
 
 const getColorByIntensity = (intensity: number): string => {
@@ -55,19 +93,48 @@ const getIntensityLabel = (intensity: number): string => {
 
 export default function HeatmapPage() {
   const [hoveredCell, setHoveredCell] = useState<string | null>(null);
+  const [selectedDisease, setSelectedDisease] = useState<string>(diseases[0]);
 
-  const criticalCount = heatmapData.filter(c => c.intensity >= 80).length;
-  const highRiskCount = heatmapData.filter(c => c.intensity >= 60 && c.intensity < 80).length;
-  const safeCount = heatmapData.filter(c => c.intensity < 40).length;
+  const getIntensityForDisease = (caseCount: number): number => {
+    if (caseCount >= 80) return caseCount;
+    return caseCount;
+  };
+
+  const displayData = maharashtraDistrictData.map(item => ({
+    ...item,
+    displayIntensity: getIntensityForDisease(item.cases[selectedDisease]),
+    displayCases: item.cases[selectedDisease],
+  }));
+
+  const criticalCount = displayData.filter(c => c.displayIntensity >= 80).length;
+  const highRiskCount = displayData.filter(c => c.displayIntensity >= 60 && c.displayIntensity < 80).length;
+  const safeCount = displayData.filter(c => c.displayIntensity < 40).length;
 
   return (
     <>
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-slate-900 mb-3">Regional Disease Intensity</h1>
-        <p className="text-slate-600 text-sm leading-relaxed max-w-3xl">
-          Real-time visualization of disease intensity across regions. The intensity metric represents the combined score of active cases,
-          case density per 100k population, and transmission rate. Higher values indicate areas requiring immediate attention.
-        </p>
+        <div className="flex items-start justify-between flex-wrap gap-4 mb-4">
+          <div>
+            <h1 className="text-4xl font-bold text-slate-900 mb-3">Maharashtra Districts - Disease Intensity</h1>
+            <p className="text-slate-600 text-sm leading-relaxed max-w-3xl">
+              Real-time visualization of disease intensity across Maharashtra districts. Select a disease to view case counts and intensity levels by district.
+            </p>
+          </div>
+          <div className="min-w-fit">
+            <label className="block text-sm font-semibold text-slate-700 mb-2">Select Disease</label>
+            <select
+              value={selectedDisease}
+              onChange={(e) => setSelectedDisease(e.target.value)}
+              className="px-4 py-2 border border-slate-300 rounded-lg bg-white text-slate-900 font-medium hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {diseases.map((disease) => (
+                <option key={disease} value={disease}>
+                  {disease}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
@@ -134,7 +201,7 @@ export default function HeatmapPage() {
 
       <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
         <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
-          <h2 className="text-xl font-bold text-slate-900">Heatmap by Region</h2>
+          <h2 className="text-xl font-bold text-slate-900">Heatmap by District - {selectedDisease}</h2>
           <div className="flex items-center gap-6 text-xs flex-wrap">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-emerald-100 rounded-md shadow-sm border border-emerald-300"></div>
@@ -155,24 +222,24 @@ export default function HeatmapPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {heatmapData.map((cell) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {displayData.map((cell) => (
             <div
-              key={cell.region}
-              onMouseEnter={() => setHoveredCell(cell.region)}
+              key={cell.district}
+              onMouseEnter={() => setHoveredCell(cell.district)}
               onMouseLeave={() => setHoveredCell(null)}
               className={`
-                ${getColorByIntensity(cell.intensity)}
+                ${getColorByIntensity(cell.displayIntensity)}
                 rounded-xl p-4 shadow-md
                 transition-all duration-300 cursor-pointer relative overflow-hidden
-                ${hoveredCell === cell.region ? 'scale-110 shadow-2xl ring-2 ring-blue-400' : 'hover:scale-105 hover:shadow-lg'}
+                ${hoveredCell === cell.district ? 'scale-110 shadow-2xl ring-2 ring-blue-400' : 'hover:scale-105 hover:shadow-lg'}
               `}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                <p className="text-xs font-bold mb-2 uppercase tracking-wide">{cell.region}</p>
-                <p className="text-2xl font-bold mb-1">{cell.intensity}</p>
-                <p className="text-xs font-semibold opacity-90">{getIntensityLabel(cell.intensity)}</p>
+                <p className="text-xs font-bold mb-2 uppercase tracking-wide">{cell.district}</p>
+                <p className="text-2xl font-bold mb-1">{cell.displayCases}</p>
+                <p className="text-xs font-semibold opacity-90">{getIntensityLabel(cell.displayIntensity)}</p>
               </div>
             </div>
           ))}
@@ -187,7 +254,7 @@ export default function HeatmapPage() {
                 </svg>
               </div>
               <p className="text-sm text-slate-700">
-                <span className="font-bold text-slate-900">{hoveredCell}</span> is currently showing significant disease activity with an intensity score of <span className="font-bold text-slate-900">{heatmapData.find(c => c.region === hoveredCell)?.intensity}</span>. Click to view comprehensive analytics and intervention plans.
+                <span className="font-bold text-slate-900">{hoveredCell}</span> has <span className="font-bold text-slate-900">{displayData.find(c => c.district === hoveredCell)?.displayCases}</span> cases of {selectedDisease} with an intensity score of <span className="font-bold text-slate-900">{displayData.find(c => c.district === hoveredCell)?.displayIntensity}</span>.
               </p>
             </div>
           </div>
