@@ -38,7 +38,7 @@ export default function KpiRow() {
         color="cyan"
       />
       <KpiCard
-        title="Public Health Risk Index"
+        title="Overall Risk Score"
         value={kpiData.publicHealthRiskIndex}
         icon="⚕️"
         variant="standard"
