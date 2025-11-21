@@ -6,7 +6,7 @@ export default function KpiRow() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
       <KpiCard
-        title="Top Rising Diseases"
+        title="Top Rising Disease"
         value={kpiData.topRisingDiseases[0]}
         icon="🦠"
         variant="standard"
