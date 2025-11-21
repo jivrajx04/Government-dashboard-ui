@@ -19,6 +19,7 @@ const navigationSections: NavSection[] = [
     items: [
       { label: 'Dashboard', href: '/dashboard', icon: '📊', section: 'MAIN' },
       { label: 'Alerts', href: '/alerts', icon: '⚠️', section: 'MAIN' },
+      { label: 'Heatmap', href: '/heatmap', icon: '🗺️', section: 'MAIN' },
     ],
   },
   {

@@ -10,6 +10,7 @@ export default function Navbar() {
     const titles: Record<string, string> = {
       '/dashboard': 'Dashboard',
       '/alerts': 'Alerts',
+      '/heatmap': 'City/Region Heatmap',
       '/labs': 'Laboratory Results',
       '/providers': 'Healthcare Providers',
       '/settings': 'Settings',
